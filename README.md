@@ -22,3 +22,15 @@
 	python inc_dec_table.py
     
     나오는 입력창에 인수 입력
+    
+    예) 
+    x1 = 2
+    x2 = 0
+    x3 = (엔터)
+    write fx
+    ? x**3 - x**2 + 1
+    write fx PRIME
+    ? 3*x**2 - 2*x
+    
+    결과값 출력
+    
