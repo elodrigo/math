@@ -3,8 +3,14 @@ from sympy.parsing.sympy_parser import parse_expr
 import sys
 
 x = Symbol('x')
+y = Symbol('y')
+a = Symbol('a')
+b = Symbol('b')
+c = Symbol('c')
 m = Symbol('m')
 n = Symbol('n')
+
+COLUMN_SPACE = 11
 
 
 def main():
@@ -16,11 +22,11 @@ def main():
     xn_list_modified = list(xn_tuple_origin)
     xn_list_modified.sort()
 
-    a = xn_tuple_origin[0]
-    b = xn_tuple_origin[-1]
+    af = xn_tuple_origin[0]
+    bf = xn_tuple_origin[-1]
 
-    xn_list_modified.append(float(a-1))
-    xn_list_modified.append(float(b+1))
+    xn_list_modified.append(float(af-1))
+    xn_list_modified.append(float(bf+1))
 
     xn_list_modified = list(set(xn_list_modified))
     xn_list_modified.sort()
@@ -34,12 +40,22 @@ def main():
 
     for xn in xn_list_modified:
 
+        # Calculate f(x) and f'(x) with x values entered.
+        # If it makes TypeError, f(x) may contain more variable such as a or b. Then don't round its result.
         r_fx = sympy_fx.subs({x: xn})
-        rf_fx = round(r_fx, 1)
+        try:
+            rf_fx = round(r_fx, 1)
+
+        except TypeError:
+            rf_fx = r_fx
         result_fx_list.append(rf_fx)
 
         r_fpx = sympy_fpx.subs({x: xn})
-        rf_fpx = round(r_fpx, 1)
+        try:
+            rf_fpx = round(r_fpx, 1)
+
+        except TypeError:
+            rf_fpx = r_fpx
         result_fpx_list.append(rf_fpx)
 
     # check if all the results are correctly stored.
@@ -73,16 +89,19 @@ def replace_with_signs(x_origin, xn, fx, fpx):
                     if fx[i] > fx[i-1]:
 
                         result_xn.insert(i, "...")
-                        result_fx.insert(i, "/")
-                        result_fpx.insert(i, "+")
+                        result_fx.insert(i, " /")
+                        result_fpx.insert(i, " +")
 
                     elif fx[i] < fx[i-1]:
 
                         result_xn.insert(i, "...")
-                        result_fx.insert(i, "\\")
-                        result_fpx.insert(i, "-")
+                        result_fx.insert(i, " \\")
+                        result_fpx.insert(i, " -")
 
             except IndexError:
+                continue
+
+            except TypeError:
                 continue
 
         else:
@@ -91,32 +110,38 @@ def replace_with_signs(x_origin, xn, fx, fpx):
                 if fx[i] > fx[i+1]:
 
                     result_xn[i] = "..."
-                    result_fx[i] = "\\"
-                    result_fpx[i] = "-"
+                    result_fx[i] = " \\"
+                    result_fpx[i] = " -"
 
                 elif fx[i] < fx[i+1]:
 
                     result_xn[i] = "..."
-                    result_fx[i] = "/"
-                    result_fpx[i] = "+"
+                    result_fx[i] = " /"
+                    result_fpx[i] = " +"
 
                 else:
                     continue
 
             except IndexError:
-                if fx[i] > fx[i-1]:
+                try:
+                    if fx[i] > fx[i-1]:
 
-                    result_xn[i] = "..."
-                    result_fx[i] = "\\"
-                    result_fpx[i] = "-"
+                        result_xn[i] = "..."
+                        result_fx[i] = " \\"
+                        result_fpx[i] = " -"
 
-                elif fx[i] < fx[i-1]:
+                    elif fx[i] < fx[i-1]:
 
-                    result_xn[i] = "..."
-                    result_fx[i] = "/"
-                    result_fpx[i] = "+"
-                else:
+                        result_xn[i] = "..."
+                        result_fx[i] = " /"
+                        result_fpx[i] = " +"
+                    else:
+                        continue
+                except TypeError:
                     continue
+
+            except TypeError:
+                continue
 
     return result_xn, result_fx, result_fpx
 
@@ -136,7 +161,7 @@ def draw_table(xn_list, result_fx, result_fpx):
             first = False
             print(f'\nx{5*sp}', end='')
         else:
-            print(f'{s}{(6-len(str(s)))*sp}', end='')
+            print(f'{s}{(COLUMN_SPACE-len(str(s)))*sp}', end='')
 
     first = True
     for t in result_fpx:
@@ -144,7 +169,7 @@ def draw_table(xn_list, result_fx, result_fpx):
             first = False
             print(f'\nf\'(x) ', end='')
         else:
-            print(f'{t}{(6-len(str(t)))*sp}', end='')
+            print(f'{t}{(COLUMN_SPACE-len(str(t)))*sp}', end='')
 
     first = True
     for u in result_fx:
@@ -152,7 +177,7 @@ def draw_table(xn_list, result_fx, result_fpx):
             first = False
             print('\nf(x)  ', end='')
         else:
-            print(f'{u}{(6-len(str(u)))*sp}', end='')
+            print(f'{u}{(COLUMN_SPACE-len(str(u)))*sp}', end='')
 
     print('\n')
 
