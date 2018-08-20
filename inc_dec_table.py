@@ -50,7 +50,7 @@ def main():
         sys.exit(0)
 
     # Finally draw table to show the result.
-    print(f'f(x): {sympy_fx}')
+    print(f'\n\nf(x): {sympy_fx}')
 
     xn_list_final, result_fx, result_fpx = \
         replace_with_signs(xn_tuple_origin, xn_list_modified, result_fx_list, result_fpx_list)
@@ -189,8 +189,8 @@ def get_input_values():
         sympy_fx = input_fx('fx')
         sympy_fpx = input_fx('FX PRIME')
 
-        print(f'\nfx: {sympy_fx}')
-        print(f'fx PRIME: {sympy_fpx}')
+        print(f'\nfx:      {sympy_fx}')
+        print(f'fx PRIME: {sympy_fpx}\n')
         fx_ans = input("are fxs correct? yes(enter), no or exit")
 
         if fx_ans == 'yes' or fx_ans == '':
@@ -234,14 +234,14 @@ def input_x_values():
 
 
 def input_fx(fx_name):
-    fx = input(f"write {fx_name} in the form sympy understand : \nex) 2*x**3 + 2*(x+3)\n")
+    fx = input(f"\nwrite {fx_name} in the form sympy understand : ex) 2*x**3 + 2*(x+3)\n: ")
 
     try:
         expression = parse_expr(fx)
         return expression
     except SyntaxError:
         print(fx)
-        fx = input(f"You may put wrong expression, type {fx_name} again in correct form\n")
+        fx = input(f"\nYou may put wrong expression, type {fx_name} again in correct form\n")
         try:
             expression = parse_expr(fx)
             return expression
