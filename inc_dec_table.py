@@ -189,9 +189,9 @@ def get_input_values():
         sympy_fx = input_fx('fx')
         sympy_fpx = input_fx('FX PRIME')
 
-        print(f'\nfx:      {sympy_fx}')
-        print(f'fx PRIME: {sympy_fpx}\n')
-        fx_ans = input("are fxs correct? yes(enter), no or exit")
+        print(f'\nf(x):  {sympy_fx}')
+        print(f'f\'(x):  {sympy_fpx}\n')
+        fx_ans = input("are f(x)s correct? yes(enter), no or exit")
 
         if fx_ans == 'yes' or fx_ans == '':
             break
