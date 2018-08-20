@@ -9,6 +9,7 @@ n = Symbol('n')
 
 def main():
 
+    # Get values from user input.
     xn_tuple_origin, sympy_fx, sympy_fpx = get_input_values()
 
     # Add value at the beginning and the end.
@@ -68,7 +69,6 @@ def replace_with_signs(x_origin, xn, fx, fpx):
         if item in x_origin:
             try:
                 if xn[i-1] in x_origin:
-                    print('yea')
 
                     if fx[i] > fx[i-1]:
 
@@ -83,7 +83,6 @@ def replace_with_signs(x_origin, xn, fx, fpx):
                         result_fpx.insert(i, "-")
 
             except IndexError:
-                print('mine')
                 continue
 
         else:
@@ -168,8 +167,8 @@ def get_input_values():
     if len(xn_list) > 0:
 
         # Print xn_list entered to see if it is correct.
-        print(xn_list)
-        print("\nare the values correct?")
+        print(f'\n{xn_list}')
+        print("are the values correct?")
         correct_ans = input("yes(enter), no or exit")
 
         if correct_ans == 'yes' or correct_ans == '':
