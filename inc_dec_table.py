@@ -10,12 +10,6 @@ n = Symbol('n')
 def main():
 
     xn_tuple_origin, sympy_fx, sympy_fpx = get_input_values()
-    # xn_tuple_origin = (0.0, 0.7)
-    # xn_tuple_origin = input_x_values()
-    # sympy_fx = x ** 3 - x ** 2 + 1
-    # sympy_fpx = 3 * x ** 2 - 2 * x
-    # xn_list = xn_list_origin
-    # xn_list.sort()
 
     # Add value at the beginning and the end.
     xn_list_modified = list(xn_tuple_origin)
