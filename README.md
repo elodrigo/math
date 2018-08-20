@@ -13,3 +13,12 @@
 ##### 4. 단, f(x)와 f'(x)를 입력 시 sympy가 인식할 수 있는 형태이어야 한다.
 	ex) 2*x***3 + x**2 + 3
     사용 가능 변수 x, m, n
+
+##### 5. Requirments
+	sympy
+    python3.6 이상
+    
+##### 6. 실행법
+	python inc_dec_table.py
+    
+    나오는 입력창에 인수 입력
