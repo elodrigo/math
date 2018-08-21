@@ -175,6 +175,8 @@ def draw_table(xn_list, result_fx, result_fpx):
 
     sp = ' '
 
+    # At first loop, display row title, and display each value between spaces.
+    # Spaces are determined based on string length.
     first = True
     for s in xn_list:
         if first:
@@ -223,6 +225,7 @@ def get_input_values():
 
     # get x values in tuple and check if the values are correct.
     while True:
+
         xn_list = input_x_values()
 
         if len(xn_list) > 0:
@@ -247,6 +250,7 @@ def get_input_values():
 
     # get fx and fx prime functions and check if it is correct.
     while True:
+
         sympy_fx = input_fx('fx')
         sympy_fpx = input_fx('FX PRIME')
 
@@ -299,8 +303,11 @@ def input_fx(fx_name):
     fx = input(f"\nwrite {fx_name} in the form sympy understand : ex) 2*x**3 + 2*(x+3)\n: ")
 
     try:
+
+        # Sympy method that convert typed string function to sympy object.
         expression = parse_expr(fx)
         return expression
+
     except SyntaxError:
         print(fx)
         fx = input(f"\nYou may put wrong expression, type {fx_name} again in correct form\n: ")
