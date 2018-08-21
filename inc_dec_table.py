@@ -126,13 +126,13 @@ def replace_with_signs(x_origin, xn, fx, fpx):
 
             except IndexError:
                 try:
-                    if fx[i] > fx[i-1]:
+                    if fx[i] < fx[i-1]:
 
                         result_xn[i] = "..."
                         result_fx[i] = "\\"
                         result_fpx[i] = "-"
 
-                    elif fx[i] < fx[i-1]:
+                    elif fx[i] > fx[i-1]:
 
                         result_xn[i] = "..."
                         result_fx[i] = "/"
