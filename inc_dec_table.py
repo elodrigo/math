@@ -10,7 +10,7 @@ c = Symbol('c')
 m = Symbol('m')
 n = Symbol('n')
 
-COLUMN_SPACE = 6    # Even number recommended
+COLUMN_SPACE = 11
 
 
 def main():
@@ -65,9 +65,8 @@ def main():
         print("Calculate failed!")
         sys.exit(0)
 
-    # Finally, draw the table to show the result.
+    # Finally draw table to show the result.
     print(f'\n\nf(x): {sympy_fx}')
-    print("=============================")
 
     xn_list_final, result_fx, result_fpx = \
         replace_with_signs(xn_tuple_origin, xn_list_modified, result_fx_list, result_fpx_list)
@@ -90,14 +89,14 @@ def replace_with_signs(x_origin, xn, fx, fpx):
                     if fx[i] > fx[i-1]:
 
                         result_xn.insert(i, "...")
-                        result_fx.insert(i, "/")
-                        result_fpx.insert(i, "+")
+                        result_fx.insert(i, " /")
+                        result_fpx.insert(i, " +")
 
                     elif fx[i] < fx[i-1]:
 
                         result_xn.insert(i, "...")
-                        result_fx.insert(i, "\\")
-                        result_fpx.insert(i, "-")
+                        result_fx.insert(i, " \\")
+                        result_fpx.insert(i, " -")
 
             except IndexError:
                 continue
@@ -111,14 +110,14 @@ def replace_with_signs(x_origin, xn, fx, fpx):
                 if fx[i] > fx[i+1]:
 
                     result_xn[i] = "..."
-                    result_fx[i] = "\\"
-                    result_fpx[i] = "-"
+                    result_fx[i] = " \\"
+                    result_fpx[i] = " -"
 
                 elif fx[i] < fx[i+1]:
 
                     result_xn[i] = "..."
-                    result_fx[i] = "/"
-                    result_fpx[i] = "+"
+                    result_fx[i] = " /"
+                    result_fpx[i] = " +"
 
                 else:
                     continue
@@ -128,14 +127,14 @@ def replace_with_signs(x_origin, xn, fx, fpx):
                     if fx[i] > fx[i-1]:
 
                         result_xn[i] = "..."
-                        result_fx[i] = "\\"
-                        result_fpx[i] = "-"
+                        result_fx[i] = " \\"
+                        result_fpx[i] = " -"
 
                     elif fx[i] < fx[i-1]:
 
                         result_xn[i] = "..."
-                        result_fx[i] = "/"
-                        result_fpx[i] = "+"
+                        result_fx[i] = " /"
+                        result_fpx[i] = " +"
                     else:
                         continue
                 except TypeError:
@@ -148,24 +147,6 @@ def replace_with_signs(x_origin, xn, fx, fpx):
 
 
 def draw_table(xn_list, result_fx, result_fpx):
-
-    # Set column space as biggest string size and make it even number
-    space = COLUMN_SPACE
-
-    for i in xn_list:
-        if len(i) > space:
-            space = len(i)
-
-    for ii in result_fx:
-        if len(ii) > space:
-            space = len(ii)
-
-    for iii in result_fpx:
-        if len(iii) > space:
-            space = len(iii)
-
-    if space / 2 != int(space / 2):
-        space += 1
 
     # At the beginning of the lists, rows title should be displayed.
     xn_list.insert(0, 'x')
@@ -180,11 +161,7 @@ def draw_table(xn_list, result_fx, result_fpx):
             first = False
             print(f'\nx{5*sp}', end='|')
         else:
-            s_sp = int(space-len(str(s)) / 2)
-            if len(s) / 2 == int(len(s) / 2):
-                print(f'{s_sp*sp}{s}{s_sp*sp}', end='|')
-            else:
-                print(f'{s_sp*sp}{s}{s_sp*sp}{sp}', end='|')
+            print(f'{s}{(COLUMN_SPACE-len(str(s)))*sp}', end='|')
 
     first = True
     for t in result_fpx:
@@ -192,11 +169,7 @@ def draw_table(xn_list, result_fx, result_fpx):
             first = False
             print(f'\nf\'(x) ', end='|')
         else:
-            t_sp = int(space-len(str(t)) / 2)
-            if len(t) / 2 == int(len(t) / 2):
-                print(f'{t_sp*sp}{t}{t_sp*sp}', end='|')
-            else:
-                print(f'{t_sp*sp}{t}{t_sp*sp}{sp}', end='|')
+            print(f'{t}{(COLUMN_SPACE-len(str(t)))*sp}', end='|')
 
     first = True
     for u in result_fx:
@@ -204,11 +177,7 @@ def draw_table(xn_list, result_fx, result_fpx):
             first = False
             print('\nf(x)  ', end='|')
         else:
-            u_sp = int(space-len(str(u)) / 2)
-            if len(u) / 2 == int(len(u) / 2):
-                print(f'{u_sp*sp}{u}{u_sp*sp}', end='|')
-            else:
-                print(f'{u_sp*sp}{u}{u_sp*sp}{sp}', end='|')
+            print(f'{u}{(COLUMN_SPACE-len(str(u)))*sp}', end='|')
 
     print('\n')
 
@@ -218,28 +187,27 @@ def draw_table(xn_list, result_fx, result_fpx):
 def get_input_values():
 
     # get x values in tuple and check if the values are correct.
-    while True:
-        xn_list = input_x_values()
+    xn_list = input_x_values()
 
-        if len(xn_list) > 0:
+    if len(xn_list) > 0:
 
-            # Print xn_list entered to see if it is correct.
-            print(f'\n{xn_list}')
-            print("are values correct?")
-            correct_ans = input("yes(enter), no or exit: ")
+        # Print xn_list entered to see if it is correct.
+        print(f'\n{xn_list}')
+        print("are the values correct?")
+        correct_ans = input("yes(enter), no or exit")
 
-            if correct_ans == 'yes' or correct_ans == '':
-                break
-            elif correct_ans == 'no':
-                pass
-            elif correct_ans == 'exit':
-                sys.exit(0)
-            else:
-                pass
-        else:
-            print(f'tuple variable entered: {xn_list}')
-            print("\nx values are not exist, or you didn't put correct int values")
+        if correct_ans == 'yes' or correct_ans == '':
+            pass
+        elif correct_ans == 'no':
+            xn_list = input_x_values()
+        elif correct_ans == 'exit':
             sys.exit(0)
+        else:
+            xn_list = input_x_values()
+    else:
+        print(f'tuple variable entered: {xn_list}')
+        print("\nx values are not exist, or you didn't put correct int values")
+        sys.exit(0)
 
     # get fx and fx prime functions and check if it is correct.
     while True:
@@ -249,7 +217,6 @@ def get_input_values():
         print(f'\nf(x):  {sympy_fx}')
         print(f'f\'(x):  {sympy_fpx}\n')
         fx_ans = input("are f(x)s correct? yes(enter), no or exit")
-        print("\n")
 
         if fx_ans == 'yes' or fx_ans == '':
             break
@@ -281,9 +248,9 @@ def input_x_values():
                 continue
             except ValueError:
                 if '/' in input_x:
-                    af, bf = input_x.split('/')
-                    abf = int(af) / int(bf)
-                    xn.append(round(float(abf), 1))
+                    a, b = input_x.split('/')
+                    ab = int(a) / int(b)
+                    xn.append(round(float(ab), 1))
 
     xn_list = list(set(xn))
     xn_list.sort()
