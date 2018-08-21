@@ -100,6 +100,9 @@ def replace_with_signs(x_origin, xn, fx, fpx):
                         result_fx.insert(i, "\\")
                         result_fpx.insert(i, "-")
 
+                    else:
+                        continue
+
             except IndexError:
                 continue
 
@@ -125,6 +128,7 @@ def replace_with_signs(x_origin, xn, fx, fpx):
                     continue
 
             except IndexError:
+
                 try:
                     if fx[i] < fx[i-1]:
 
@@ -137,8 +141,10 @@ def replace_with_signs(x_origin, xn, fx, fpx):
                         result_xn[i] = "..."
                         result_fx[i] = "/"
                         result_fpx[i] = "+"
+
                     else:
                         continue
+
                 except TypeError:
                     continue
 
@@ -177,11 +183,16 @@ def draw_table(xn_list, result_fx, result_fpx):
 
     # At first loop, display row title, and display each value between spaces.
     # Spaces are determined based on string length.
+
     first = True
+
     for s in xn_list:
+
         if first:
+
             first = False
             print(f'\nx{5*sp}', end='|')
+
         else:
             s_len = len(str(s))
             s_sp = int((space-s_len) / 2)
@@ -191,10 +202,14 @@ def draw_table(xn_list, result_fx, result_fpx):
                 print(f'{s_sp*sp}{s}{s_sp*sp}{sp}', end='|')
 
     first = True
+
     for t in result_fpx:
+
         if first:
+
             first = False
             print(f'\nf\'(x) ', end='|')
+
         else:
             t_len = len(str(t))
             t_sp = int((space-t_len) / 2)
@@ -204,10 +219,14 @@ def draw_table(xn_list, result_fx, result_fpx):
                 print(f'{t_sp*sp}{t}{t_sp*sp}{sp}', end='|')
 
     first = True
+
     for u in result_fx:
+
         if first:
+
             first = False
             print('\nf(x)  ', end='|')
+
         else:
             u_len = len(str(u))
             u_sp = int((space-u_len) / 2)
@@ -304,7 +323,7 @@ def input_fx(fx_name):
 
     try:
 
-        # Sympy method that convert typed string function to sympy object.
+        # A sympy method which converts typed string function to a sympy object.
         expression = parse_expr(fx)
         return expression
 
