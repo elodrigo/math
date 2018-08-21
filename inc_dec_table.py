@@ -159,25 +159,25 @@ def draw_table(xn_list, result_fx, result_fpx):
     for s in xn_list:
         if first:
             first = False
-            print(f'\nx{5*sp}', end='|')
+            print(f'\nx{5*sp}', end='')
         else:
-            print(f'{s}{(COLUMN_SPACE-len(str(s)))*sp}', end='|')
+            print(f'{s}{(COLUMN_SPACE-len(str(s)))*sp}', end='')
 
     first = True
     for t in result_fpx:
         if first:
             first = False
-            print(f'\nf\'(x) ', end='|')
+            print(f'\nf\'(x) ', end='')
         else:
-            print(f'{t}{(COLUMN_SPACE-len(str(t)))*sp}', end='|')
+            print(f'{t}{(COLUMN_SPACE-len(str(t)))*sp}', end='')
 
     first = True
     for u in result_fx:
         if first:
             first = False
-            print('\nf(x)  ', end='|')
+            print('\nf(x)  ', end='')
         else:
-            print(f'{u}{(COLUMN_SPACE-len(str(u)))*sp}', end='|')
+            print(f'{u}{(COLUMN_SPACE-len(str(u)))*sp}', end='')
 
     print('\n')
 
