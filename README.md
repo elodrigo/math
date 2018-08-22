@@ -1,5 +1,3 @@
-# Math Functions
-
 ## inc_dec_table.py
 
 ### 증감표
