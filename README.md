@@ -16,7 +16,7 @@
 
 ##### 6. Requirments
 	sympy
-    python3.6 이상
+    python >= 3.6
     
 ##### 7. 실행법
 	python inc_dec_table.py
